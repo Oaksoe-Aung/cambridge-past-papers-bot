@@ -1,0 +1,3 @@
+python-telegram-bot>=20,<23
+cloudscraper>=1.2.71,<2
+pypdf>=4,<7
