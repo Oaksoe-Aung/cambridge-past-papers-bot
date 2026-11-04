@@ -4,17 +4,18 @@ Telegram bot for searching and sending Cambridge past papers.
 
 ## Deploy to Render
 
-This repository includes a Render Blueprint (`render.yaml`) for a free web
-service. The bot uses Telegram long polling and exposes `/health` so Render can
-check that the process is running.
+The bot uses Telegram long polling and exposes `/health` so Render can check
+that the process is running.
 
-1. Create a **private** GitHub repository and push this project.
-2. In Render, choose **New → Blueprint** and connect the repository.
-3. During setup, enter `BOT_TOKEN` as a secret environment variable. Do not put
-   the token in this repository. Since the previous token was exposed, revoke it
-   with BotFather and enter the newly generated token.
-4. Deploy the Blueprint and wait for the service to become healthy.
-5. To reduce idle spin-down, configure an external uptime monitor to request
+1. In Render, choose **New → Web Service** and connect this repository.
+2. Set the build command to `pip install -r requirements.txt` and the start
+   command to `python bot.py`.
+3. Set the health check path to `/health` and select the Free instance plan.
+4. Add `BOT_TOKEN` as a secret environment variable in Render. Never commit the
+   token. Revoke the previously exposed token with BotFather and use its
+   replacement.
+5. Deploy and wait for the service to become healthy.
+6. To reduce idle spin-down, configure an external uptime monitor to request
    `https://<your-service>.onrender.com/health` every 5 minutes.
 
 Free Render services can sleep, restart, or be suspended when usage limits are
